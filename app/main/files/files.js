@@ -575,21 +575,27 @@ angular
               }
             }
 
+            console.info("currentInfo:", $scope.currentInfo);
+            // 保留之前的region
+            var defaultRegion = "oss-cn-hangzhou";
+            if ($scope.currentInfo && $scope.currentInfo.region) {
+              defaultRegion = $scope.currentInfo.region;
+            }
+
             $scope.currentInfo = info;
 
             if (info.bucket) {
             // has bucket , list objects
               $scope.currentBucket = info.bucket;
 
-              if (!$rootScope.bucketMap[info.bucket]) {
-                Toast.error('No permission');
-
-                clearObjectsList();
-
-                return;
+              // 设置region
+              var tmpBucket = $rootScope.bucketMap[info.bucket]
+              if (tmpBucket && tmpBucket.region) {
+                info.region = tmpBucket.region;
+              } else {
+                info.region = defaultRegion;
               }
 
-              info.region = $rootScope.bucketMap[info.bucket].region;
               $scope.ref.isBucketList = false;
 
               if (fileName) {

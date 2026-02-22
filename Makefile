@@ -13,7 +13,7 @@ BUILD=ELECTRON_MIRROR=$(ELECTRON_MIRROR) $(PKGER) ./dist $(NAME) --asar --asar-u
 ELECTON=./node_modules/.bin/electron
 
 i:
-	cnpm i
+	npm i
 clean:
 	rm -rf dist node_modules build releases node/crc64/cpp-addon/node_modules node/crc64/electron-crc64-prebuild/node_modules node/ossstore/node_modules
 dev:
@@ -64,7 +64,7 @@ dmg:
 	#mkdir -p build/$(NAME)-darwin-x64/.background
 	#cp dist/icons/background.tiff build/$(NAME)-darwin-x64/.background
 	rm -f releases/$(VERSION)/$(NAME).dmg || continue
-	hdiutil create -size 250M -format UDZO -srcfolder build/$(NAME)-darwin-x64 -o releases/$(VERSION)/$(NAME).dmg
+	hdiutil create -size 2048M -format UDZO -srcfolder build/$(NAME)-darwin-x64 -o releases/$(VERSION)/$(NAME).dmg
 all:win32 win64 linux32 linux64 mac asar
 	@echo 'Done'
 asar:

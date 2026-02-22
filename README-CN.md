@@ -185,3 +185,17 @@ oss-browser/
 ## 9. 开源 LICENSE
 
 [Apache License 2.0](LICENSE)
+
+## 10. mac打包问题
+# 打包
+```bash
+git clone https://github.com/aliyun/oss-browser.git
+cd oss-browser
+nvm use 8.2.1
+make i
+make build
+## 关键，打包时需要拷贝 node_modules 到 dist 目录
+cp -r node_modules dist/
+make mac
+make dmg
+```
